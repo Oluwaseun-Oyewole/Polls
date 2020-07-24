@@ -1,0 +1,12 @@
+{% extends 'votingapp/base.html' %}
+{% block content %}
+         {% if employee %}
+            <div class="container">
+                <form class="form-inline my-2 my-lg-2 " method="POST">
+                    {% csrf_token %}
+                      <input class="form-control mr-sm-2 col-md-8" type="search" placeholder="{{ employee.question_text }}" aria-label="Search" name="question_text" value="{{employee.question_text}} ">
+                      <button class="btn btn-secondary my-2 my-sm-0 btn-sm" type="submit">Edit Question_text </button>
+                </form>
+            </div>
+        {% endif %}
+{% endblock %}

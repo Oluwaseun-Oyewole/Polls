@@ -2,20 +2,37 @@
 {% extends 'votingapp/base.html' %}
 <title> {% block title %} Welcome to the Pollster {% endblock %}</title>
 {% block content %}
-    <h2 class="text-center mb-3">Poll Questions</h2>
+
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+           <button class="close" data-dismiss="alert">
+               <small><sup>x</sup></small>
+           </button>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <h3 class="text-center mb-3">Poll Questions</h3>
     {% if latest_question_list %}
+
+        <a href="{% url 'votingapp:poll_question'%}">Question?</a>
         {% for question in latest_question_list %}
+
+
 
                 <div class="card mb-3">
                         <div class="card-body">
-                            <p class="lead">{{ question.question_text }}</p>
+                            <p class="lead"><a href="{% url 'votingapp:edit' question.id %}">{{ question.question_text }}</a></p>
                             <a href="{% url 'votingapp:detail' question.id %}" class="btn btn-primary btn-sm"> Votes Now </a>
                             <a href="{% url 'votingapp:result' question.id %}" class="btn btn-secondary btn-sm"> Results </a>
+                            <a href="{% url 'votingapp:poll_choice' %}" class="btn btn-info btn-sm">option(s)</a>
+                            <a href="{% url 'votingapp:delete' question.id %}"><button class="btn btn-danger btn-sm" style="margin-top:10px;">Delete</button></a>
                         </div>
                 </div>
-
-        {% endfor %}
-
+     {% endfor %}
     {% else %}
         <p>No Polls available</p>
     {% endif %}

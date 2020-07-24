@@ -3,7 +3,7 @@
 {% block content %}
 
 <a href="{% url 'votingapp:home' %}" class="btn btn-secondary btn-sm mb-3">Back To Polls</a>
-<h1 class="text-center mb-3" >{{ question.question_text}}</h1>
+<h5 class="text-center mb-3" >{{ question.question_text}}</h5>
 
 {% if error in error_message %}
     <p class="alert alert-danger">
@@ -18,7 +18,7 @@
                 <input style=" margin-top:15px;" type="radio" name="choice" class="form-check-input default" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
             </div>
-
+            <a href="{% url 'votingapp:delete_choice' choice.id%}"><button class="btn"><i class="fa fa-close"></i></button></a>
         {% endfor %}
         <input  type="submit" value="vote" class="btn btn-success btn-lg btn-block mt-4">
 </form>
